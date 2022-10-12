@@ -12,6 +12,7 @@ const Blank = () => {
     const [sex, setSex] = useState('')
     // const [dateBirth, setDateBirth] = useState('')
     const [seriaNumber, setSeriaNumber] = useState('')
+    const [image, setImage] = useState('')
 
     const [regionOfficial, setRegionOfficial] = useState('')
     const [districtOffisial, setDistrictOffisial] = useState('')
@@ -52,7 +53,24 @@ const Blank = () => {
     const post = (e) => {
         e.preventDefault()
 
-        axios.post(API_PATH + `/main/client/`, { first_name: firstName, last_name: lastName, sex, date_birth: aday + ' ' + amonth + ' ' + ayear, password_expire: pday + ' ' + pmonth + ' ' + pyear, seria_number: seriaNumber, regionOfficial, district: districtOffisial, currentregionOfficial, address_district: currentdistrictOffisial, mahalla, phone, degree, status })
+        const formData = new FormData()
+        formData.append("image", image)
+        formData.append("first_name", firstName)
+        formData.append("last_name", lastName)
+        formData.append("sex", sex)
+        formData.append("date_birth", aday + ' ' + amonth + ' ' + ayear)
+        formData.append("password_expire", pday + ' ' + pmonth + ' ' + pyear)
+        formData.append("seria_number", seriaNumber)
+        formData.append("regionOfficial", regionOfficial)
+        formData.append("district", districtOffisial)
+        formData.append("currentregionOfficial", currentregionOfficial)
+        formData.append("address_district", currentdistrictOffisial)
+        formData.append("mahalla", mahalla)
+        formData.append("phone", phone)
+        formData.append("degree", degree)
+        formData.append("status", status)
+
+        axios.post(API_PATH + `/main/client/`, formData, config)
             .then((res) => {
                 console.log(res);
             })
@@ -256,6 +274,7 @@ const Blank = () => {
                                                 accept="image/*,image/jpeg"
                                                 name="myphoto"
                                                 type="file"
+                                                onChange={e => setImage(e.target.files[0])}
                                                 id='my_photo'
                                                 style={{ display: 'none' }}
                                             />
