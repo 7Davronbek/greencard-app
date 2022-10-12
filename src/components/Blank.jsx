@@ -42,7 +42,12 @@ const Blank = () => {
     // const [currentregion, setCurrentregion] = useState([])
     // const [districtId, setDistrictId] = useState('')
 
-    // let a = aday + amonth + ayear
+    const config = {
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'multipart/form-data'
+        },
+    }
 
     const post = (e) => {
         e.preventDefault()
@@ -245,6 +250,7 @@ const Blank = () => {
 
                                             <img className='w-100' src="img/Photo.png" alt="blank" />
                                         </div>
+
                                         <div className="column-buttons">
                                             <input
                                                 accept="image/*,image/jpeg"
@@ -255,6 +261,7 @@ const Blank = () => {
                                             />
                                             <label htmlFor="my_photo"><FontAwesomeIcon icon={faDownload} />Fotosurat yuklash</label>
                                         </div>
+
                                     </div>
                                     <div className="col-lg-9">
 
