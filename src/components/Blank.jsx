@@ -4,14 +4,42 @@ import React, { useEffect, useState } from 'react'
 
 const Blank = () => {
     const [modal, setModal] = useState(false)
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [imageUrl, setImageUrl] = useState(null);
 
-    useEffect(() => {
-        if (selectedImage) {
-            setImageUrl(URL.createObjectURL(selectedImage));
-        }
-    }, [selectedImage]);
+    const [firstName, setFirsName] = useState('')
+    const [lastName, setLastName] = useState('')
+    const [sex, setSex] = useState('')
+    const [dateBirth, setDateBirth] = useState('')
+    const [district, setDistrict] = useState('')
+    const [seriaNumber, setSeriaNumber] = useState('')
+    const [passwordExpire, setPasswordExpire] = useState('')
+    const [addressDistrict, setAddressDistrict] = useState('')
+    const [mahalla, setMahalla] = useState('')
+    const [phone, setPhone] = useState('')
+    const [degree, setDegree] = useState('')
+    const [status, setStatus] = useState('')
+
+    const [day, setDay] = useState('')
+    const [month, setMonth] = useState('')
+    const [year, setYear] = useState('')
+    // setDateBirth(a)
+
+    console.log(day);
+    console.log(month);
+    console.log(setYear);
+    // const client = {
+    //     'firstName': '',
+    //     'lastName': '',
+    //     'sex': '',
+    //     'dateBirth': '',
+    //     'district': '',
+    //     'seriaNumber': '',
+    //     'passwordExpire': '',
+    //     'addressDistrict': '',
+    //     'mahalla': '',
+    //     'phone': '',
+    //     'degree': '',
+    //     'status': ''
+    // }
 
     return (
         <div className='Blank'>
@@ -27,22 +55,22 @@ const Blank = () => {
                                 <div className="col-lg-4">
                                     <div className="form-input">
                                         <h5>FAMILIYANGIZ (INGLIZ TILIDA)</h5>
-                                        <input className='controls' type="text" id="lastName" />
+                                        <input onChange={e => setLastName(e.target.value)} value={lastName} className='controls' type="text" id="lastName" />
                                     </div>
                                     <div className="form-input d-lg-none d-block">
                                         <h5>ISMINGIZ (INGLIZ TILIDA)</h5>
-                                        <input className='controls' type="text" id="lastName" />
+                                        <input onChange={e => setFirsName(e.target.value)} value={firstName} className='controls' type="text" id="lastName" />
                                     </div>
                                     <div className="form-input">
                                         <h5>JINSINGIZ</h5>
                                         <div className="d-flex justify-content-between">
-                                            <label htmlFor="male" className='controls mywidth'>
+                                            <label onClick={e => setSex('male')} htmlFor="male" className='controls mywidth'>
                                                 <input type="radio" name="gender" id="male" />
                                                 <span></span>
                                                 <div className="icon"><FontAwesomeIcon icon={faPerson} /></div>
                                                 Erkak
                                             </label>
-                                            <label htmlFor="female" className='controls mywidth'>
+                                            <label onClick={e => setSex('famale')} htmlFor="female" className='controls mywidth'>
                                                 <input type="radio" name="gender" id="female" />
                                                 <span></span>
                                                 <div className="icon"><FontAwesomeIcon icon={faPersonDress} /></div>
@@ -53,8 +81,8 @@ const Blank = () => {
                                     <div className="form-input d-block d-lg-none">
                                         <h5>TUG`ILGAN KUNINGIZ</h5>
                                         <div className="d-flex justify-content-between flex-nowrap">
-                                            <input className='controls w-32 mt-3' placeholder='1' type="number" name="" id="" />
-                                            <select className='controls w-32 mt-3 cursor'>
+                                            <input onChange={e => setDay(e.target.value)} value={day} className='controls w-32 mt-3' placeholder='1' type="number" name="" id="" />
+                                            <select onChange={e => setMonth(e.target.value)} className='controls w-32 mt-3 cursor'>
                                                 <option value="Yanvar">Yanvar</option>
                                                 <option value="Fevral">Fevral</option>
                                                 <option value="Mart">Mart</option>
@@ -68,7 +96,7 @@ const Blank = () => {
                                                 <option value="Noyabr">Noyabr</option>
                                                 <option value="Dekabr">Dekabr</option>
                                             </select>
-                                            <input className='controls w-32 mt-3' placeholder='2005   ' type="number" name="" id="" />
+                                            <input onChange={e => setYear(e.target.value)} value={year} className='controls w-32 mt-3' placeholder='2005' type="number" name="" id="" />
                                         </div>
                                     </div>
                                     <div className="form-input">
@@ -193,13 +221,7 @@ const Blank = () => {
                             <div className="row photo-blog">
                                 <div className="col-lg-3">
                                     <div className="column-img">
-                                        {imageUrl && selectedImage && (
-                                            <img
-                                                src={imageUrl}
-                                                alt={selectedImage.name}
-                                                height="100px"
-                                            />
-                                        )}
+
                                         <img className='w-100' src="img/Photo.png" alt="blank" />
                                     </div>
                                     <div className="column-buttons">
@@ -209,7 +231,6 @@ const Blank = () => {
                                             type="file"
                                             id='my_photo'
                                             style={{ display: 'none' }}
-                                            onChange={e => setSelectedImage(e.target.files[0])}
                                         />
                                         <label htmlFor="my_photo"><FontAwesomeIcon icon={faDownload} />Fotosurat yuklash</label>
                                     </div>
@@ -286,7 +307,7 @@ const Blank = () => {
                                         <textarea placeholder='NOMOZGOH MAHALLA, ARCHAZOR KO’CHASI 39-UY' cols="30" rows="20" className='controls' />
                                     </div>
                                     <div className="form-input d-lg-none d-block">
-                                    <h5>TELEFON RAQAMINGIZ</h5>
+                                        <h5>TELEFON RAQAMINGIZ</h5>
                                         <input className='controls' placeholder='+998 97 123 45 67' type="tel" name="" id="" />
                                     </div>
                                 </div>
@@ -312,7 +333,7 @@ const Blank = () => {
                                         </select>
                                     </div>
                                     <div className="form-input">
-                                    <h5>TELEFON RAQAMINGIZ</h5>
+                                        <h5>TELEFON RAQAMINGIZ</h5>
                                         <input className='controls' placeholder='+998 97 123 45 67' type="tel" name="" id="" />
                                     </div>
                                 </div>
@@ -372,7 +393,7 @@ const Blank = () => {
                                 <div className="col-lg-6 offset-lg-1">
                                     <div className="form-input">
                                         <h5>21 YOSHGA TO’LMAGAN FARZANDLAR HAQIDA MA’LUMOT KIRITING</h5>
-                                        <button onClick={() => { setModal(!modal) }} className="controls btn-con">FARZAND QO’SHISH <FontAwesomeIcon icon={faPlus} /></button>
+                                        <div onClick={() => { setModal(true) }} className="controls btn-con">FARZAND QO’SHISH <FontAwesomeIcon icon={faPlus} /></div>
                                     </div>
 
                                 </div>
@@ -517,13 +538,7 @@ const Blank = () => {
                                             </div>
                                             <div className="col-lg-4">
                                                 <div className="column-img">
-                                                    {imageUrl && selectedImage && (
-                                                        <img
-                                                            src={imageUrl}
-                                                            alt={selectedImage.name}
-                                                            height="100px"
-                                                        />
-                                                    )}
+
                                                     <img className='w-100' src="img/babe.png" alt="blank" />
                                                 </div>
                                                 <div className="column-buttons">
@@ -533,7 +548,6 @@ const Blank = () => {
                                                         type="file"
                                                         id='my_photo'
                                                         style={{ display: 'none' }}
-                                                        onChange={e => setSelectedImage(e.target.files[0])}
                                                     />
                                                     <label htmlFor="my_photo"><FontAwesomeIcon icon={faDownload} />Fotosurat yuklash</label>
                                                 </div>
@@ -545,8 +559,8 @@ const Blank = () => {
                                 <div className="modal-footer">
                                     <button onClick={() => { setModal(!modal) }} type="button" className="close">Yopish</button>
 
-                                    <button type='submit' className="btn send d-flex align-items-center">
-                                    SAQLASH
+                                    <button className="btn send d-flex align-items-center">
+                                        SAQLASH
                                     </button>
                                 </div>
 
@@ -556,9 +570,6 @@ const Blank = () => {
                 </div>
             </div>
         </div>
-
-
-
     )
 }
 

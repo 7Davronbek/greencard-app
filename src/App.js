@@ -7,10 +7,10 @@ import Question from './components/Question'
 const App = () => {
   return (
     <div>
-      <Header/>
-      <About/>
-      <Question/>
-      <CallUs/>
+      <Header />
+      <About />
+      <Question />
+      <CallUs />
     </div>
   )
 }
