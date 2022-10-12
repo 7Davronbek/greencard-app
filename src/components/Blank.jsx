@@ -167,7 +167,7 @@ const Blank = () => {
                                             <select onChange={(e) => setDistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
-                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} value={item.region_id}>{item.name_uz}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -176,35 +176,7 @@ const Blank = () => {
                                             <input onChange={e => setSeriaNumber(e.target.value)} value={seriaNumber} placeholder='AA1234567' className='controls' type="text" id="lastName" />
 
                                             <div className="d-flex justify-content-between flex-nowrap">
-                                                <input className='controls w-32 mt-3' placeholder='1' type="number" id="" />
-                                                <select className='controls w-32 mt-3 cursor'>
-                                                    <option value="Yanvar">Yanvar</option>
-                                                    <option value="Fevral">Fevral</option>
-                                                    <option value="Mart">Mart</option>
-                                                    <option value="Aprel">Aprel</option>
-                                                    <option value="May">May</option>
-                                                    <option value="Iyun">Iyun</option>
-                                                    <option value="Iyul">Iyul</option>
-                                                    <option value="Avgust">Avgust</option>
-                                                    <option value="Sentabr">Sentabr</option>
-                                                    <option value="Oktabr">Oktabr</option>
-                                                    <option value="Noyabr">Noyabr</option>
-                                                    <option value="Dekabr">Dekabr</option>
-                                                </select>
-                                                <input className='controls w-32 mt-3' placeholder='2005   ' type="number" id="" />
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div className="col-lg-4 d-none d-lg-block offset-lg-1">
-                                        <div className="form-input">
-                                            <h5>ISMINGIZ (INGLIZ TILIDA)</h5>
-                                            <input onChange={e => setFirsName(e.target.value)} value={firstName} className='controls' type="text" id="lastName" />
-                                        </div>
-                                        <div className="form-input">
-                                            <h5>TUG`ILGAN KUNINGIZ</h5>
-                                            <div className="d-flex justify-content-between flex-nowrap">
-                                                <input onChange={e => setPday(e.target.value)} value={pday} className='controls w-32 mt-3' placeholder='1' type="number" id="" />
+                                                <input onChange={e => setPday(e.target.value)} className='controls w-32 mt-3' placeholder='1' type="number" id="" />
                                                 <select onChange={e => setPmonth(e.target.value)} className='controls w-32 mt-3 cursor'>
                                                     <option value="Yanvar">Yanvar</option>
                                                     <option value="Fevral">Fevral</option>
@@ -219,7 +191,35 @@ const Blank = () => {
                                                     <option value="Noyabr">Noyabr</option>
                                                     <option value="Dekabr">Dekabr</option>
                                                 </select>
-                                                <input onChange={e => setPyear(e.target.value)} value={pyear} className='controls w-32 mt-3' placeholder='2005   ' type="number" id="" />
+                                                <input onChange={e => setPyear(e.target.value)} className='controls w-32 mt-3' placeholder='2005   ' type="number" id="" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div className="col-lg-4 d-none d-lg-block offset-lg-1">
+                                        <div className="form-input">
+                                            <h5>ISMINGIZ (INGLIZ TILIDA)</h5>
+                                            <input onChange={e => setFirsName(e.target.value)} value={firstName} className='controls' type="text" id="lastName" />
+                                        </div>
+                                        <div className="form-input">
+                                            <h5>TUG`ILGAN KUNINGIZ</h5>
+                                            <div className="d-flex justify-content-between flex-nowrap">
+                                                <input onChange={e => setAday(e.target.value)} value={aday} className='controls w-32 mt-3' placeholder='1' type="number" id="" />
+                                                <select onChange={e => setAmonth(e.target.value)} className='controls w-32 mt-3 cursor'>
+                                                    <option value="Yanvar">Yanvar</option>
+                                                    <option value="Fevral">Fevral</option>
+                                                    <option value="Mart">Mart</option>
+                                                    <option value="Aprel">Aprel</option>
+                                                    <option value="May">May</option>
+                                                    <option value="Iyun">Iyun</option>
+                                                    <option value="Iyul">Iyul</option>
+                                                    <option value="Avgust">Avgust</option>
+                                                    <option value="Sentabr">Sentabr</option>
+                                                    <option value="Oktabr">Oktabr</option>
+                                                    <option value="Noyabr">Noyabr</option>
+                                                    <option value="Dekabr">Dekabr</option>
+                                                </select>
+                                                <input onChange={e => setAyear(e.target.value)} value={ayear} className='controls w-32 mt-3' placeholder='2005   ' type="number" id="" />
                                             </div>
                                         </div>
                                         <div className="form-input">
@@ -227,7 +227,7 @@ const Blank = () => {
                                             <select onChange={(e) => setDistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
-                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} value={item.region_id}>{item.name_uz}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -298,7 +298,7 @@ const Blank = () => {
                                             <select onChange={e => setCurrentdistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
-                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} value={item.region_id}>{item.name_uz}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -317,7 +317,7 @@ const Blank = () => {
                                             <select onChange={e => setCurrentdistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
-                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} value={item.region_id}>{item.name_uz}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -351,7 +351,7 @@ const Blank = () => {
                                                 <option value="OLIY MA'LUMOT">OLIY MA'LUMOT</option>
                                                 <option value="MAGISTRATURA">MAGISTRATURA</option>
                                                 <option value="ASPIRANTURA">ASPIRANTURA</option>
-                                                <option value="DOKTORANTURA ">DOKTORANTURA </option>
+                                                <option value="DOKTORANTURA">DOKTORANTURA </option>
 
                                             </select>
                                         </div>
@@ -374,7 +374,7 @@ const Blank = () => {
 
                                                 <option value="empty">Tanlanmagan </option>
                                                 <option value="Bo'ydoq / Turmushga chiqmagan">Bo'ydoq / Turmushga chiqmagan</option>
-                                                <option value=" Uylangan / Turmushga chiqqan"> Uylangan / Turmushga chiqqan </option>
+                                                <option value="Uylangan / Turmushga chiqqan"> Uylangan / Turmushga chiqqan </option>
                                                 <option value="Ajrashgan, Beva / Yolg'iz">Ajrashgan, Beva / Yolg'iz </option>
 
                                             </select>
