@@ -10,11 +10,18 @@ const Blank = () => {
     const [firstName, setFirsName] = useState('')
     const [lastName, setLastName] = useState('')
     const [sex, setSex] = useState('')
-    const [dateBirth, setDateBirth] = useState('')
+    // const [dateBirth, setDateBirth] = useState('')
     const [seriaNumber, setSeriaNumber] = useState('')
-    const [regionOfficial, setOfficial] = useState('')
-    const [passwordExpire, setPasswordExpire] = useState('')
-    const [addressDistrict, setAddressDistrict] = useState('')
+
+    const [regionOfficial, setRegionOfficial] = useState('')
+    const [districtOffisial, setDistrictOffisial] = useState('')
+
+    const [currentregionOfficial, setCurrentregionOfficial] = useState('')
+    const [currentdistrictOffisial, setCurrentdistrictOffisial] = useState('')
+
+    // const [passwordExpire, setPasswordExpire] = useState('')
+    // const [addressDistrict, setAddressDistrict] = useState('')
+
     const [mahalla, setMahalla] = useState('')
     const [phone, setPhone] = useState('')
     const [degree, setDegree] = useState('')
@@ -31,36 +38,30 @@ const Blank = () => {
 
     const [region, setRegion] = useState([])
     const [district, setDistrict] = useState([])
+    // const [currentdistrict, setCurrentdistrict] = useState([])
+    // const [currentregion, setCurrentregion] = useState([])
+    // const [districtId, setDistrictId] = useState('')
 
-    let a = aday + amonth + ayear
-    console.log(a);
-
+    // let a = aday + amonth + ayear
 
     const post = (e) => {
         e.preventDefault()
-        // console.log(firstName + ' ' + lastName + ' ' + a);
+
+        axios.post(API_PATH + `/main/client/`, { first_name: firstName, last_name: lastName, sex, date_birth: aday + ' ' + amonth + ' ' + ayear, password_expire: pday + ' ' + pmonth + ' ' + pyear, seria_number: seriaNumber, regionOfficial, district: districtOffisial, currentregionOfficial, address_district: currentdistrictOffisial, mahalla, phone, degree, status })
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
-    // const client = {
-    //     'firstName': '',
-    //     'lastName': '',
-    //     'sex': '',
-    //     'dateBirth': '',
-    //     'district': '',
-    //     'seriaNumber': '',
-    //     'passwordExpire': '',
-    //     'addressDistrict': '',
-    //     'mahalla': '',
-    //     'phone': '',
-    //     'degree': '',
-    //     'status': ''
-    // }
 
     const getDistrict = () => {
 
-        axios.get(API_PATH + `/main/district/?region_id=1`)
+        axios.get(API_PATH + `/main/district/`)
+            // ?region_id=${districtId ? districtId : 1}
             .then((res) => {
                 setDistrict(res.data)
-                console.log(res);
             })
             .catch((err) => {
                 console.log(err);
@@ -70,8 +71,7 @@ const Blank = () => {
     const getRegion = () => {
         axios.get(API_PATH + '/main/region/')
             .then((res) => {
-                setRegion(res.data) 
-                console.log(res);
+                setRegion(res.data)
             })
             .catch((err) => {
                 console.log(err);
@@ -154,17 +154,17 @@ const Blank = () => {
                                         </div>
                                         <div className="form-input">
                                             <h5>VILOYATINGIZ</h5>
-                                            <select onChange={e => { console.log(e); }} className='controls cursor'>
+                                            <select onChange={e => { setRegionOfficial(e.target.value); console.log(e.target.id); }} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {region && region.map((item, index) => (
-                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} id={item.id} value={item.name_uz}>{item.name_uz}</option>
                                                 ))}
 
                                             </select>
                                         </div>
                                         <div className="form-input d-block d-lg-none">
                                             <h5>TUMANINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={(e) => setDistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
                                                     <option key={index} value={item.name_uz}>{item.name_uz}</option>
@@ -224,7 +224,7 @@ const Blank = () => {
                                         </div>
                                         <div className="form-input">
                                             <h5>TUMANINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={(e) => setDistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
                                                     <option key={index} value={item.name_uz}>{item.name_uz}</option>
@@ -261,7 +261,7 @@ const Blank = () => {
                                         <div className="info">
                                             <h4>Fotosurat yuklashning qisqacha <span>qoidalari:</span></h4>
                                             <ul>
-                                                <li>Yuklanayotgan fotosurat maksimal hajmi 240 KB dan oshmasligi.</li>
+                                                <li>Yuklanayotgan fotosurat maksimal hajmi 2 MB dan oshmasligi.</li>
                                                 <li>Fotosurat kengligi kamida 600X600 piksel yoki 5x5 sm bo'lishi lozim.</li>
                                                 <li>Fotosurat foni oq va ravshan bo'lishi lozim.</li>
                                                 <li>Fotosuratni kerakli hajmda kesish va tayyorlash uchun mana bu yerga o'ting.</li>
@@ -285,77 +285,45 @@ const Blank = () => {
                                     <div className="col-lg-4">
                                         <div className="form-input">
                                             <h5>VILOYATINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => setCurrentregionOfficial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
+                                                {region && region.map((item, index) => (
+                                                    <option key={index} id={item.id} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
                                                 <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
                                             </select>
                                         </div>
                                         <div className="form-input d-lg-none d-block">
                                             <h5>TUMANINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => setCurrentdistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
-                                                <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                {district && district.map((item, index) => (
+                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="form-input">
                                             <h5>MANZILINGIZ</h5>
-                                            <textarea placeholder='NOMOZGOH MAHALLA, ARCHAZOR KO’CHASI 39-UY' cols="30" rows="20" className='controls' />
+                                            <textarea onChange={e => setMahalla(e.target.value)} value={mahalla} placeholder='NOMOZGOH MAHALLA, ARCHAZOR KO’CHASI 39-UY' cols="30" rows="20" className='controls' />
                                         </div>
                                         <div className="form-input d-lg-none d-block">
                                             <h5>TELEFON RAQAMINGIZ</h5>
-                                            <input className='controls' placeholder='+998 97 123 45 67' type="tel" id="" />
+                                            <input onChange={e => setPhone(e.target.value)} className='controls' placeholder='+998 97 123 45 67' type="tel" id="" />
                                         </div>
                                     </div>
                                     <div className="col-lg-4 d-none d-lg-block  offset-lg-1">
                                         <div className="form-input">
                                             <h5>TUMANINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => setCurrentdistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
-                                                <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                {district && district.map((item, index) => (
+                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="form-input">
                                             <h5>TELEFON RAQAMINGIZ</h5>
-                                            <input className='controls' placeholder='+998 97 123 45 67' type="tel" id="" />
+                                            <input onChange={e => setPhone(e.target.value)} className='controls' placeholder='+998 97 123 45 67' type="tel" id="" />
                                         </div>
                                     </div>
                                 </div>
@@ -371,16 +339,20 @@ const Blank = () => {
                                     <div className="col-lg-4">
                                         <div className="form-input">
                                             <h5>TA’LIM DARAJANGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => setDegree(e.target.value)} className='controls cursor'>
 
                                                 <option value="empty">Tanlanmagan </option>
 
-                                                <option value="oliy">Oliy</option>
+                                                <option value="MAKTAB(9 sinf)">MAKTAB(9 sinf)</option>
+                                                <option value="MAKTAB(11 sinf)">MAKTAB(11 sinf)</option>
+                                                <option value="LITSEY">LITSEY</option>
+                                                <option value="KOLLEJ">KOLLEJ</option>
+                                                <option value="TUGALLANMAGAN OLIY">TUGALLANMAGAN OLIY</option>
+                                                <option value="OLIY MA'LUMOT">OLIY MA'LUMOT</option>
+                                                <option value="MAGISTRATURA">MAGISTRATURA</option>
+                                                <option value="ASPIRANTURA">ASPIRANTURA</option>
+                                                <option value="DOKTORANTURA ">DOKTORANTURA </option>
 
-                                                <option id="sel-supr-yes" value="tugallanmagan">Tugallanmagan oliy</option>
-
-                                                <option value="orta">
-                                                    O'rta-maxsus</option>
                                             </select>
                                         </div>
 
@@ -398,13 +370,12 @@ const Blank = () => {
                                     <div className="col-lg-4">
                                         <div className="form-input">
                                             <h5>OILAVIY HOLATINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => setStatus(e.target.value)} className='controls cursor'>
 
-                                                <option value="notmarried">Uylanmagan / Turmushga chiqmagan</option>
-                                                <option value="married">Uylangan / Turmushga chiqgan</option>
-
-                                                <option value="ajrashgan">Ajrashgan</option>
-                                                <option value="ajrashgan">Beva</option>
+                                                <option value="empty">Tanlanmagan </option>
+                                                <option value="Bo'ydoq / Turmushga chiqmagan">Bo'ydoq / Turmushga chiqmagan</option>
+                                                <option value=" Uylangan / Turmushga chiqqan"> Uylangan / Turmushga chiqqan </option>
+                                                <option value="Ajrashgan, Beva / Yolg'iz">Ajrashgan, Beva / Yolg'iz </option>
 
                                             </select>
                                         </div>
