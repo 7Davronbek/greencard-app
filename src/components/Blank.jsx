@@ -118,7 +118,7 @@ const Blank = () => {
 
         const formData = new FormData()
 
-        formData.append("image", cimage)
+        formData.append("image_child", cimage)
         formData.append("first_name", cname)
         formData.append("last_name", csurname)
         formData.append("sex", csex)
