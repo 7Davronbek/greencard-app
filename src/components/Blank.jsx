@@ -11,8 +11,8 @@ const Blank = () => {
     const [lastName, setLastName] = useState('')
     const [sex, setSex] = useState('')
     const [dateBirth, setDateBirth] = useState('')
-    const [district, setDistrict] = useState('')
     const [seriaNumber, setSeriaNumber] = useState('')
+    const [regionOfficial, setOfficial] = useState('')
     const [passwordExpire, setPasswordExpire] = useState('')
     const [addressDistrict, setAddressDistrict] = useState('')
     const [mahalla, setMahalla] = useState('')
@@ -27,6 +27,10 @@ const Blank = () => {
     const [pday, setPday] = useState('')
     const [pmonth, setPmonth] = useState('')
     const [pyear, setPyear] = useState('')
+
+
+    const [region, setRegion] = useState([])
+    const [district, setDistrict] = useState([])
 
     let a = aday + amonth + ayear
     console.log(a);
@@ -52,8 +56,21 @@ const Blank = () => {
     // }
 
     const getDistrict = () => {
+
+        axios.get(API_PATH + `/main/district/?region_id=1`)
+            .then((res) => {
+                setDistrict(res.data)
+                console.log(res);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
+    const getRegion = () => {
         axios.get(API_PATH + '/main/region/')
             .then((res) => {
+                setRegion(res.data) 
                 console.log(res);
             })
             .catch((err) => {
@@ -62,6 +79,8 @@ const Blank = () => {
     }
 
     useEffect(() => {
+        getDistrict()
+        getRegion()
     }, [])
 
 
@@ -135,42 +154,21 @@ const Blank = () => {
                                         </div>
                                         <div className="form-input">
                                             <h5>VILOYATINGIZ</h5>
-                                            <select className='controls cursor'>
+                                            <select onChange={e => { console.log(e); }} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
-                                                <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                {region && region.map((item, index) => (
+                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
+
                                             </select>
                                         </div>
                                         <div className="form-input d-block d-lg-none">
                                             <h5>TUMANINGIZ</h5>
                                             <select className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
-                                                <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                {district && district.map((item, index) => (
+                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
                                             </select>
                                         </div>
                                         <div className="form-input">
@@ -228,20 +226,9 @@ const Blank = () => {
                                             <h5>TUMANINGIZ</h5>
                                             <select className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
-                                                <option value="Toshkent">Toshkent shahri</option>
-                                                <option value="Tashkent">Toshkent vil.</option>
-                                                <option value="Qoraqalpoq">Qoraqalpog'iston</option>
-                                                <option value="Andijon">Andijon</option>
-                                                <option value="Buxoro">Buxoro</option>
-                                                <option value="Jizzax">	Jizzax</option>
-                                                <option value="Qashqadaryo">Qashqadaryo</option>
-                                                <option value="Navoiy">Navoiy</option>
-                                                <option value="Namangan">Namangan</option>
-                                                <option value="Samarqand">Samarqand</option>
-                                                <option value="Surxondaryo">Surxondaryo</option>
-                                                <option value="Sirdaryo">Sirdaryo</option>
-                                                <option value="Fargona">Farg'ona</option>
-                                                <option value="Xorazm">Xorazm</option>
+                                                {district && district.map((item, index) => (
+                                                    <option key={index} value={item.name_uz}>{item.name_uz}</option>
+                                                ))}
                                             </select>
                                         </div>
                                     </div>
