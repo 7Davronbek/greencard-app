@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose, faDownload, faPerson, faPersonDress } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPerson, faPersonDress } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import { API_PATH, config } from '../tools/constants';
+import { API_PATH, config, FATHER } from '../tools/constants';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Children = () => {
 
@@ -42,7 +44,9 @@ const Children = () => {
     const [cdistrict, setCdistrict] = useState('')
     const [cimage, setCimage] = useState('')
 
-    const postBaby = (id) => {
+    const postBaby = (e) => {
+        e.preventDefault()
+        console.log('lorem');
 
         const formData = new FormData()
 
@@ -52,7 +56,8 @@ const Children = () => {
         formData.append("sex", csex)
         formData.append("place_birth", cdistrict)
         formData.append("date_birth", cday + ' ' + cmonth + ' ' + cyear)
-        formData.append("parent", id)
+        formData.append("parent", localStorage.getItem(FATHER))
+        console.log(formData);
 
         axios.post(API_PATH + '/main/children/', formData, config)
             .then((res) => {
@@ -63,16 +68,22 @@ const Children = () => {
             })
     }
 
+    const nav = useNavigate()
+
     useEffect(() => {
         getDistrict()
         getRegion()
-    }, [])
+        if (!localStorage.getItem(FATHER)) {
+            toast.error('Blankani toldiring', { position: 'bottom-left' })
+            nav('/blank', { replace: true })
+        }
+    }, [cregion])
 
     return (
-        <div className='Children'>
+        <div className='Children '>
             <div className="container">
                 <div className="row">
-                    <div className="col-lg-6">
+                    <form onSubmit={postBaby} className="col-lg-10 mx-auto py-5">
                         <div className="modal-contents">
                             <div className="modal-header">
                                 <h3>Farzandingiz haqida ma'lumot kiritish</h3>
@@ -136,7 +147,7 @@ const Children = () => {
                                                 <select onChange={e => setCregion(e.target.value)} className='controls cursor'>
                                                     <option value="empty">Tanlanmagan</option>
                                                     {region && region.map((item, index) => (
-                                                        <option key={index} value={item.region_id}>{item.name_uz}</option>
+                                                        <option key={index} value={item.id}>{item.name_uz}</option>
                                                     ))}
                                                 </select>
                                             </div>
@@ -183,17 +194,18 @@ const Children = () => {
                                             <div className="column-img">
 
 
+
                                                 {cimage ? <>
-                                                    {/* <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" /> */}
-                                                    {cimage.name}
+                                                    <img src={URL.createObjectURL(cimage)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
                                                 </> : <><img className='w-100' src="img/babe.png" alt="blank" /></>}
+
                                             </div>
                                             <div className="column-buttons">
                                                 <input
                                                     accept="image/*,image/jpeg"
                                                     name="myphoto"
                                                     type="file"
-                                                    onChange={e => setCimage(e.target.files[1])}
+                                                    onChange={e => setCimage(e.target.files[0])}
                                                     // onChange={e => {setCimage(e.target.files[0])}}
                                                     id='my_photo'
                                                     style={{ display: 'none' }}
@@ -214,7 +226,8 @@ const Children = () => {
                             </div> */}
 
                         </div>
-                    </div>
+                        <button type="submit" className="btn btn-warning">Enter</button>
+                    </form>
                 </div>
             </div>
         </div>

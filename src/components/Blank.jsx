@@ -455,8 +455,9 @@ const Blank = () => {
 
                                                 <option value="empty">Tanlanmagan </option>
                                                 <option value="Bo'ydoq / Turmushga chiqmagan">Bo'ydoq / Turmushga chiqmagan</option>
+                                                <option value="Ajrashgan">Ajrashgan</option>
                                                 <option value="Uylangan / Turmushga chiqqan"> Uylangan / Turmushga chiqqan </option>
-                                                <option value="Ajrashgan, Beva / Yolg'iz">Ajrashgan, Beva / Yolg'iz </option>
+                                                <option value=" Beva / Yolg'iz">Ajrashgan, Beva / Yolg'iz </option>
 
                                             </select>
                                         </div>
