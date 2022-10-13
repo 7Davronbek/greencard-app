@@ -1,10 +1,10 @@
-import React from 'react'
 import About from './components/About'
 import CallUs from './components/CallUs'
 import Header from './components/Header'
 import Question from './components/Question'
 
 const App = () => {
+
   return (
     <div>
       <Header />

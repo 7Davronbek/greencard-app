@@ -12,6 +12,8 @@ import Questions from './pages/Questions';
 import Contact from './pages/Contact';
 import Abouts from './pages/Abouts';
 import Children from './pages/Children';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -26,6 +28,7 @@ root.render(
         <Route path="/questions" exact element={<Questions />} />
         <Route path="/contacts" exact element={<Contact />} />
       </Routes>
+      <ToastContainer />
       <Footer />
     </HashRouter>
 );

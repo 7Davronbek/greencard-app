@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { API_PATH, config, FATHER } from '../tools/constants';
 
 const Blank = () => {
@@ -23,6 +24,7 @@ const Blank = () => {
 
     const [isChildren, setIsChildren] = useState('')
     const [success, setSuccess] = useState(false)
+    const [isLoding, setIsLoading] = useState(false)
 
     // const [passwordExpire, setPasswordExpire] = useState('')
     // const [addressDistrict, setAddressDistrict] = useState('')
@@ -51,6 +53,7 @@ const Blank = () => {
 
     const post = (e) => {
         e.preventDefault()
+        setIsLoading(true)
 
         const formData2 = new FormData()
 
@@ -70,28 +73,33 @@ const Blank = () => {
         formData2.append("degree", degree)
         formData2.append("status", status)
 
-        axios.post(API_PATH + `/main/client/`, formData2, config)
-            .then((res) => {
-                localStorage.setItem(FATHER, res.data.id)
-                console.log(res.data.id);
-                if (isChildren === 'xa') {
-                    nav('/children', { replace: true })
-                } else {
-                    setSuccess(true)
-                    nav('/', { replace: true })
-                }
-                // if (cname.length > 0 && csurname.length > 0 && csex.length > 0 && cday.length > 0 && cmonth.length > 0 && cyear.length > 0) {
-                //     postBaby(res.data.id)
-                // }
-            })
-            .catch((err) => {
-                console.log(err);
-            })
+        if (firstName.length > 0 && lastName.length > 0 && sex.length > 0 && aday.length > 0 && amonth.length > 0 && ayear.length > 0 && seriaNumber.length > 0 && regionOfficial.length > 0 && districtOffisial.length > 0 && currentregionOfficial.length > 0 && currentdistrictOffisial.length > 0 && mahalla.length > 0 && phone.length > 0 && degree.length > 0 && status.length > 0 && isChildren.length > 0) {
+            axios.post(API_PATH + `/main/client/`, formData2, config)
+                .then((res) => {
+                    setIsLoading(false)
+                    localStorage.setItem(FATHER, res.data.id)
+                    if (isChildren === 'xa') {
+                        toast.success('Bolangizni malumotlarini toldiring', { position: "bottom-left" })
+                        nav('/children', { replace: true })
+                    } else {
+                        setSuccess(true)
+                        nav('/', { replace: true })
+                    }
+                    // if (cname.length > 0 && csurname.length > 0 && csex.length > 0 && cday.length > 0 && cmonth.length > 0 && cyear.length > 0) {
+                    //     postBaby(res.data.id)
+                    // }
+                })
+                .catch((err) => {
+                    toast.error("Internet Error!", { position: "bottom-left" })
+                    setIsLoading(false)
+                })
+        } else {
+            toast.error("Malumotlarni to'liq kiriting!", { position: "bottom-left" })
+            setIsLoading(false)
+        }
     }
 
     const getDistrict = () => {
-        console.log(regionOfficial);
-
         axios.get(API_PATH + `/main/district/?region_id=${regionOfficial ? regionOfficial : ''}`)
             // ?region_id=${districtId ? districtId : 1}
             .then((res) => {
@@ -317,6 +325,7 @@ const Blank = () => {
 
                                         <div className="column-buttons">
                                             <input
+
                                                 accept="image/*,image/jpeg"
                                                 name="myphoto"
                                                 type="file"
@@ -467,7 +476,7 @@ const Blank = () => {
 
                                     </div>
 
-                                    <button type='submit'>Enter</button>
+                                    <button className='btn btn-warning d-flex align-items-center' disabled={isLoding} type='submit'>Enter {isLoding ? <i class=" mx-3 spinner-border text-dark" role="status"></i> : ''} </button>
                                 </div>
                             </div>
                         </div>
