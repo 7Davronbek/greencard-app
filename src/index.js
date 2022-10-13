@@ -8,6 +8,8 @@ import Navbar from './components/Navbar';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
 import BlankPage from './pages/BlankPage';
+import Questions from './pages/Questions';
+import Contact from './pages/Contact';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,7 +18,9 @@ root.render(
       <ScrollToTop />
       <Routes>
         <Route path="/" exact element={<App />} />
-        <Route path="blank" exact element={<BlankPage />} />
+        <Route path="/blank" exact element={<BlankPage />} />
+        <Route path="/questions" exact element={<Questions />} />
+        <Route path="/contacts" exact element={<Contact />} />
       </Routes>
       <Footer />
     </HashRouter>

@@ -21,7 +21,7 @@ const Header = () => {
                         <div className="img">
                             <img className='w-100' src="img/header.png" alt="" />
                         </div>
-                        <div class="go-btn d-block d-lg-none"><a class="btn" href="#/blank">Anketa to’ldirish</a></div>
+                        <div className="go-btn d-block d-lg-none"><a className="btn" href="#/blank">Anketa to’ldirish</a></div>
                     </div>
                 </div>
             </div>

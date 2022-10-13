@@ -10,7 +10,7 @@ const About = () => {
                         <div className="img">
                             <img className='w-100' src="img/about.png" alt="" />
                         </div>
-                        <div class="go-btn d-block d-lg-none"><a class="btn" href="#/blank">Anketa to’ldirish</a></div>
+                        <div className="go-btn d-block d-lg-none"><a className="btn" href="#/blank">Anketa to’ldirish</a></div>
                     </div>
                     <div className="col-lg-5">
                         <div className="info">
