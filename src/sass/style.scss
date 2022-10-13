@@ -107,6 +107,7 @@ body {
         right: 0;
         background: transparent;
         transition: all ease 0.8s;
+        background-color: #0F124D;
         // background: red;
 
         ul.nav-menu {
@@ -309,6 +310,10 @@ body {
         }
 
 
+    }
+
+    .navbarLine {
+        margin-top: 104px;
     }
 
     .Header {
