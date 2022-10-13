@@ -84,8 +84,9 @@ const Blank = () => {
     }
 
     const getDistrict = () => {
+        console.log(regionOfficial);
 
-        axios.get(API_PATH + `/main/district/`)
+        axios.get(API_PATH + `/main/district/?region_id=${regionOfficial ? regionOfficial : ''}`)
             // ?region_id=${districtId ? districtId : 1}
             .then((res) => {
                 setDistrict(res.data)
@@ -140,7 +141,7 @@ const Blank = () => {
     useEffect(() => {
         getDistrict()
         getRegion()
-    }, [])
+    }, [regionOfficial])
 
 
 
@@ -213,10 +214,10 @@ const Blank = () => {
                                         </div>
                                         <div className="form-input">
                                             <h5>VILOYATINGIZ</h5>
-                                            <select onChange={e => { setRegionOfficial(e.target.value); console.log(e.target.id); }} className='controls cursor'>
+                                            <select onChange={e => { setRegionOfficial(e.target.value) }} className='controls cursor'>
                                                 <option value="empty">Tanlanmagan</option>
                                                 {region && region.map((item, index) => (
-                                                    <option key={index} id={item.id} value={item.name_uz}>{item.name_uz}</option>
+                                                    <option key={index} id={item.id} value={item.id}>{item.name_uz}</option>
                                                 ))}
 
                                             </select>
