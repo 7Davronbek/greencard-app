@@ -2,7 +2,8 @@ import { faClose, faDownload, faPerson, faPersonDress, faPlus } from '@fortaweso
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { API_PATH } from '../tools/constants';
+import { useNavigate } from 'react-router-dom';
+import { API_PATH, config, FATHER } from '../tools/constants';
 
 const Blank = () => {
     const [modal, setModal] = useState(false)
@@ -19,6 +20,9 @@ const Blank = () => {
 
     const [currentregionOfficial, setCurrentregionOfficial] = useState('')
     const [currentdistrictOffisial, setCurrentdistrictOffisial] = useState('')
+
+    const [isChildren, setIsChildren] = useState('')
+    const [success, setSuccess] = useState(false)
 
     // const [passwordExpire, setPasswordExpire] = useState('')
     // const [addressDistrict, setAddressDistrict] = useState('')
@@ -43,12 +47,7 @@ const Blank = () => {
     // const [currentregion, setCurrentregion] = useState([])
     // const [districtId, setDistrictId] = useState('')
 
-    const config = {
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'multipart/form-data'
-        },
-    }
+    const nav = useNavigate()
 
     const post = (e) => {
         e.preventDefault()
@@ -73,10 +72,17 @@ const Blank = () => {
 
         axios.post(API_PATH + `/main/client/`, formData2, config)
             .then((res) => {
-                console.log(res);
-                if(cname.length > 0 && csurname.length > 0 && csex.length > 0 && cday.length > 0 && cmonth.length > 0 && cyear.length > 0) {
-                    postBaby(res.data.id)
+                localStorage.setItem(FATHER, res.data.id)
+                console.log(res.data.id);
+                if (isChildren === 'xa') {
+                    nav('/children', { replace: true })
+                } else {
+                    setSuccess(true)
+                    nav('/', { replace: true })
                 }
+                // if (cname.length > 0 && csurname.length > 0 && csex.length > 0 && cday.length > 0 && cmonth.length > 0 && cyear.length > 0) {
+                //     postBaby(res.data.id)
+                // }
             })
             .catch((err) => {
                 console.log(err);
@@ -117,26 +123,26 @@ const Blank = () => {
     const [cdistrict, setCdistrict] = useState('')
     const [cimage, setCimage] = useState('')
 
-    const postBaby = (id) => {
+    // const postBaby = (id) => {
 
-        const formData = new FormData()
+    //     const formData = new FormData()
 
-        formData.append("image_childrens", cimage)
-        formData.append("first_name", cname)
-        formData.append("last_name", csurname)
-        formData.append("sex", csex)
-        formData.append("place_birth", cdistrict)
-        formData.append("date_birth", cday + ' ' + cmonth + ' ' + cyear)
-        formData.append("parent", id)
+    //     formData.append("image_childrens", cimage)
+    //     formData.append("first_name", cname)
+    //     formData.append("last_name", csurname)
+    //     formData.append("sex", csex)
+    //     formData.append("place_birth", cdistrict)
+    //     formData.append("date_birth", cday + ' ' + cmonth + ' ' + cyear)
+    //     formData.append("parent", id)
 
-        axios.post(API_PATH + '/main/children/', formData, config)
-            .then((res) => {
-                console.log(res);
-            })
-            .catch(err => {
-                console.log(err);
-            })
-    }
+    //     axios.post(API_PATH + '/main/children/', formData, config)
+    //         .then((res) => {
+    //             console.log(res);
+    //         })
+    //         .catch(err => {
+    //             console.log(err);
+    //         })
+    // }
 
     useEffect(() => {
         getDistrict()
@@ -327,7 +333,7 @@ const Blank = () => {
                                         <div className="info">
                                             <h4>Fotosurat yuklashning qisqacha <span>qoidalari:</span></h4>
                                             <ul>
-                                                <li>Yuklanayotgan fotosurat maksimal hajmi 2 MB dan oshmasligi.</li>
+                                                <li>Yuklanayotgan fotosurat maksimal hajmi 250 kb dan oshmasligi.</li>
                                                 <li>Fotosurat kengligi kamida 600X600 piksel yoki 5x5 sm bo'lishi lozim.</li>
                                                 <li>Fotosurat foni oq va ravshan bo'lishi lozim.</li>
                                                 <li>Fotosuratni kerakli hajmda kesish va tayyorlash uchun mana bu yerga o'ting.</li>
@@ -450,8 +456,13 @@ const Blank = () => {
 
                                     <div className="col-lg-6 offset-lg-1">
                                         <div className="form-input">
-                                            <h5>21 YOSHGA TO’LMAGAN FARZANDLAR HAQIDA MA’LUMOT KIRITING</h5>
-                                            <div onClick={() => { setModal(true) }} className="controls btn-con">FARZAND QO’SHISH <FontAwesomeIcon icon={faPlus} /></div>
+                                            <h5>21 YOSHGA TO’LMAGAN FARZANDLAR BORMI</h5>
+                                            <select onChange={e => setIsChildren(e.target.value)} className='controls cursor' name="" id="">
+                                                <option value="">Tanlanmagan</option>
+                                                <option value="xa">XA</option>
+                                                <option value="yoq">YO'Q</option>
+                                            </select>
+                                            {/* <div onClick={() => { setModal(true) }} className="controls btn-con">FARZAND QO’SHISH <FontAwesomeIcon icon={faPlus} /></div> */}
                                         </div>
 
                                     </div>
@@ -463,7 +474,7 @@ const Blank = () => {
                     </>
                 </div>
 
-                <div className={`application-modal ${modal ? 'active' : ''}`}>
+                {/* <div className={`application-modal ${modal ? 'active' : ''}`}>
                     <div className="modal-dialog">
                         <div className="row justify-content-center">
                             <div className="col-lg-6">
@@ -578,7 +589,6 @@ const Blank = () => {
 
 
                                                         {cimage ? <>
-                                                            {/* <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" /> */}
                                                             {cimage.name}
                                                         </> : <><img className='w-100' src="img/babe.png" alt="blank" /></>}
                                                     </div>
@@ -611,7 +621,7 @@ const Blank = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </form>
         </>
     )

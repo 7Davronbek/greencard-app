@@ -1,6 +1,7 @@
 import { faFacebookF, faInstagram, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Footer = () => {
     return (
@@ -11,7 +12,7 @@ const Footer = () => {
                         <div className="logo">
                             <a href="/"><img src="img/logo.png" alt="" /></a>
                         </div>
-                        <p className='paragraf'>Greencard.uz bilan Green Card lotereyasini yutib oling! Greencard.uz sizni Amerika DV Lottery dasturida rasmiy ro’yxatdan o’tkazadi.</p>
+                        <p className='paragraf'>usa.uz bilan Green Card lotereyasini yutib oling! Greencardusa.uz sizni Amerika DV Lottery dasturida rasmiy ro’yxatdan o’tkazadi.</p>
                         <div className="socials">
                             <ul>
                                 <li>
@@ -28,16 +29,16 @@ const Footer = () => {
                     </div>
                     <div className="col-lg-4 col-10">
                         <ul className='links-menu'>
-                            <li><a href="#about">Dastur haqida</a></li>
-                            <li><a href="#questions">Savollar</a></li>
-                            <li><a href="#contacts">Aloqa</a></li>
+                            <li><Link to="/about">Dastur haqida</Link></li>
+                            <li><Link to="/questions">Savollar</Link></li>
+                            <li><Link to="/contacts">Aloqa</Link></li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <div className="copyright">
-                <h6>Copyright 2022 <a href="kokoagency.uz">kOkO digital agency</a>. All rights reserved.</h6>
+                <h6>Copyright 2022 <a href="kokoagency.uz">zamaan team</a>. All rights reserved.</h6>
             </div>
         </div>
     )
