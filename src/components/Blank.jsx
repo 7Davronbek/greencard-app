@@ -53,28 +53,30 @@ const Blank = () => {
     const post = (e) => {
         e.preventDefault()
 
-        const formData = new FormData()
+        const formData2 = new FormData()
 
-        formData.append("image", image)
-        formData.append("first_name", firstName)
-        formData.append("last_name", lastName)
-        formData.append("sex", sex)
-        formData.append("date_birth", aday + ' ' + amonth + ' ' + ayear)
-        formData.append("password_expire", pday + ' ' + pmonth + ' ' + pyear)
-        formData.append("seria_number", seriaNumber)
-        formData.append("regionOfficial", regionOfficial)
-        formData.append("district", districtOffisial)
-        formData.append("currentregionOfficial", currentregionOfficial)
-        formData.append("address_district", currentdistrictOffisial)
-        formData.append("mahalla", mahalla)
-        formData.append("phone", phone)
-        formData.append("degree", degree)
-        formData.append("status", status)
+        formData2.append("image", image)
+        formData2.append("first_name", firstName)
+        formData2.append("last_name", lastName)
+        formData2.append("sex", sex)
+        formData2.append("date_birth", aday + ' ' + amonth + ' ' + ayear)
+        formData2.append("password_expire", pday + ' ' + pmonth + ' ' + pyear)
+        formData2.append("seria_number", seriaNumber)
+        formData2.append("regionOfficial", regionOfficial)
+        formData2.append("district", districtOffisial)
+        formData2.append("currentregionOfficial", currentregionOfficial)
+        formData2.append("address_district", currentdistrictOffisial)
+        formData2.append("mahalla", mahalla)
+        formData2.append("phone", phone)
+        formData2.append("degree", degree)
+        formData2.append("status", status)
 
-        axios.post(API_PATH + `/main/client/`, formData, config)
+        axios.post(API_PATH + `/main/client/`, formData2, config)
             .then((res) => {
                 console.log(res);
-                postBaby(res.data.id)
+                if(cname.length > 0 && csurname.length > 0 && csex.length > 0 && cday.length > 0 && cmonth.length > 0 && cyear.length > 0) {
+                    postBaby(res.data.id)
+                }
             })
             .catch((err) => {
                 console.log(err);
@@ -118,7 +120,7 @@ const Blank = () => {
 
         const formData = new FormData()
 
-        formData.append("image_child", cimage)
+        formData.append("image_childrens", cimage)
         formData.append("first_name", cname)
         formData.append("last_name", csurname)
         formData.append("sex", csex)
@@ -574,8 +576,9 @@ const Blank = () => {
                                                     <div className="column-img">
 
 
-                                                        {image ? <>
-                                                            <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
+                                                        {cimage ? <>
+                                                            {/* <img src={URL.createObjectURL(image)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" /> */}
+                                                            {cimage.name}
                                                         </> : <><img className='w-100' src="img/babe.png" alt="blank" /></>}
                                                     </div>
                                                     <div className="column-buttons">
@@ -583,7 +586,7 @@ const Blank = () => {
                                                             accept="image/*,image/jpeg"
                                                             name="myphoto"
                                                             type="file"
-                                                            onChange={e => setCimage(e.target.files[0])}
+                                                            onChange={e => setCimage(e.target.files[1])}
                                                             // onChange={e => {setCimage(e.target.files[0])}}
                                                             id='my_photo'
                                                             style={{ display: 'none' }}
