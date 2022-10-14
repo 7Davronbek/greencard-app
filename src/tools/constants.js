@@ -1,4 +1,6 @@
-export const API_PATH = 'https://greencardusa.uz/backend'
+export const API_PATH = 'https://onzone.kokoagency.uz/'
+
+
 
 export const FATHER = 'GREEN_CARD_FATHER'
 
