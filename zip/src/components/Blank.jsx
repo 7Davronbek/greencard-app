@@ -477,10 +477,7 @@ const Blank = () => {
 
                                     </div>
 
-                                   
-                                    <div className="send-btn">
-                                    <button className='d-flex align-items-center' disabled={isLoding} type='submit'>Jo'natish {isLoding ? <i class=" mx-3 spinner-border text-dark" role="status"></i> : ''} </button>
-                            </div>
+                                    <button className='btn btn-warning d-flex align-items-center' disabled={isLoding} type='submit'>Enter {isLoding ? <i class=" mx-3 spinner-border text-dark" role="status"></i> : ''} </button>
                                 </div>
                             </div>
                         </div>

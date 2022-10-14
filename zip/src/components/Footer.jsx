@@ -1,5 +1,4 @@
-
-import { faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
+import { faFacebookF, faInstagram, faTelegramPlane } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { Link } from 'react-router-dom'
@@ -17,7 +16,13 @@ const Footer = () => {
                         <div className="socials">
                             <ul>
                                 <li>
-                                    <a href="https://t.me/zamaan3"><FontAwesomeIcon icon={faTelegramPlane} /></a>
+                                    <a href="/"><FontAwesomeIcon icon={faFacebookF} /></a>
+                                </li>
+                                <li>
+                                    <a href="/"><FontAwesomeIcon icon={faTelegramPlane} /></a>
+                                </li>
+                                <li>
+                                    <a href="/"><FontAwesomeIcon icon={faInstagram} /></a>
                                 </li>
                             </ul>
                         </div>
@@ -33,7 +38,7 @@ const Footer = () => {
             </div>
             
             <div className="copyright">
-                <h6>Copyright 2022 <a href="zamaan.uz">zamaan team</a>. All rights reserved.</h6>
+                <h6>Copyright 2022 <a href="kokoagency.uz">zamaan team</a>. All rights reserved.</h6>
             </div>
         </div>
     )

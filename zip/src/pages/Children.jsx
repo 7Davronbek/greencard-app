@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose, faDownload, faPerson, faPersonDress } from '@fortawesome/free-solid-svg-icons';
+import { faDownload, faPerson, faPersonDress } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { API_PATH, config, FATHER } from '../tools/constants';
 import { useNavigate } from 'react-router-dom';
@@ -129,7 +129,7 @@ const Children = () => {
                         <form onSubmit={postBaby} className="col-lg-10 mx-auto py-5">
                             <div className="modal-contents">
                                 <div className="modal-header">
-                                    <div className="table-title mb-3">Farzandingiz haqida ma'lumot kiritish</div>
+                                    <h3>Farzandingiz haqida ma'lumot kiritish</h3>
                                     {/* <FontAwesomeIcon onClick={() => { setModal(!modal) }} icon={faClose} /> */}
                                 </div>
                                 <div className="modal-body">
@@ -235,17 +235,21 @@ const Children = () => {
                                             </div>
                                             <div className="col-lg-4">
                                                 <div className="column-img">
+
+
+
                                                     {cimage ? <>
                                                         <img src={URL.createObjectURL(cimage)} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
                                                     </> : <><img className='w-100' src="img/babe.png" alt="blank" /></>}
 
                                                 </div>
-                                                <div className="column-buttons baby-buttons">
+                                                <div className="column-buttons">
                                                     <input
                                                         accept="image/*,image/jpeg"
                                                         name="myphoto"
                                                         type="file"
                                                         onChange={e => setCimage(e.target.files[0])}
+                                                        // onChange={e => {setCimage(e.target.files[0])}}
                                                         id='my_photo'
                                                         style={{ display: 'none' }}
                                                     />
@@ -265,43 +269,27 @@ const Children = () => {
                         </div> */}
 
                             </div>
-                            <div className="send-btn mt-3">
-                                <button type="submit" disabled={isLoading} className="btn btn-warning">Jo'natish {isLoading ? <i class=" mx-2 spinner-border spinner-border-sm text-dark" role="status"></i> : ''} </button>
-
-                            </div>
+                            <button type="submit" disabled={isLoading} className="btn btn-warning">Enter {isLoading ? <i class=" mx-2 spinner-border spinner-border-sm text-dark" role="status"></i> : ''} </button>
                         </form>
                     </div>
                 </div>
             </div>
 
-            {!success ? <>
-                <div className="isitAll">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-7 mx-auto">
-                                <div className="d-flex justify-content-between flex-column connn">
-                                  <div className="headerrr d-flex">
-                                  <h3>21 yoshga to’lmagan farzandingiz bormi ?</h3>
-                                    <label onClick={e => setCsex('yoq')} htmlFor="yoq" className='controls mywidth'>
-                                      <FontAwesomeIcon icon={faClose}/>
-                                    </label>
-                                  </div>
-                                    <div className="d-flex mx-auto align-items-center">
-                                        <label onClick={e => setCsex('xa')} htmlFor="xa" className='controls mywidth'>
-                                            <input onChange={e => setSon('xa')} type="radio" name="gender" id="xa" />
-                                            <span></span>
-                                            Bor
-                                        </label>
-                                        <label onClick={e => setCsex('yoq')} htmlFor="yoq" className='controls mywidth'>
-                                            <input onChange={e => setSon('yoq')} type="radio" name="gender" id="yoq" />
-                                            <span></span>
-                                            Yo'q
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            {success ? <>
+                <h1>Bolangiz bormi?</h1>
+
+                <div className="d-flex w-50 justify-content-between">
+                    <label onClick={e => setCsex('xa')} htmlFor="xa" className='controls mywidth'>
+                        <input onChange={e => setSon('xa')} type="radio" name="gender" id="xa" />
+                        <span></span>
+                        Xa
+                    </label>
+                    <label onClick={e => setCsex('yoq')} htmlFor="yoq" className='controls mywidth'>
+                        <input onChange={e => setSon('yoq')} type="radio" name="gender" id="yoq" />
+                        <span></span>
+                        Yo'q
+                    </label>
+                    {/* <button onClick={sendSon}>Send</button> */}
                 </div>
             </> : <></>}
         </>
