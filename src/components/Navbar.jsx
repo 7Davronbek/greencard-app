@@ -37,7 +37,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         {/* <div className=""></div> */}
-                        <div className="col-2 d-lg-block d-none offset-lg-5">
+                        <div className="col-3 d-lg-block d-none offset-lg-4">
                             <div className="tel"><a href="tel:+998908232838">+998 90 827 28 38</a></div>
                         </div>
 
