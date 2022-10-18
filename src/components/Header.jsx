@@ -8,8 +8,8 @@ const Header = () => {
                 <div className="row">
                     <div className="col-lg-6">
                         <div className="info">
-                            <h1>Greencard.uz bilan <span>Green Card</span> lotereyasini <span>yutib oling!</span></h1>
-                            <p>Greencard.uz sizni Amerika DV Lottery dasturida rasmiy ro’yxatdan o’tkazadi</p>
+                            <h1>Greencardusa.uz bilan <span>Green Card</span> lotereyasini <span>yutib oling!</span></h1>
+                            <p>Greencardusa.uz sizni Amerika DV Lottery dasturida rasmiy ro’yxatdan o’tkazadi</p>
                             <div className="go-btn d-lg-block d-none">
                                 <Link to="/blank" className="btn">
                                     Anketa to’ldirish

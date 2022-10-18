@@ -1,11 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'react-toastify/dist/ReactToastify.css';
 import InputMask from "react-input-mask";
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
+import { API_PATH } from '../tools/constants';
+import axios from 'axios';
 
 const CallUs = () => {
+    const [phone, setPhone] = useState('')
+    const handleSubmit = e => {
+        e.preventDefault()
+        axios.post(API_PATH + '/main/contact/', { phone })
+            .then((res) => {
+                toast.success("Malumotlaringiz jo'natildi!", {position: "bottom-left"})
+                setPhone('')
+            })
+            .catch((err) => {
+                toast.error("Internet Error!", {position: "bottom-left"})
+            })
+    }
     return (
-        <div className='CallUs'>
+        <div className='CallUs py-5'>
             <div className="container">
                 <div className="titles text-center">
                     <h6 className="aboveT">ALOQA</h6>
@@ -14,15 +28,16 @@ const CallUs = () => {
                 </div>
                 <div className="row justify-content-center">
                     <div className="col-lg-6">
-                        <form>
+                        <form onSubmit={handleSubmit} >
                             <div className="tel">
                                 <InputMask
                                     mask="+\9\9\8\ (99) 999-99-99"
                                     alwaysShowMask={true}
                                     maskChar="_"
+                                    required
                                     placeholder='Telefon raqamingizni kiriting...'
-                                // value={phone_number}
-                                // onChange={e => setPhone_number(e.target.value)}
+                                    value={phone}
+                                    onChange={e => setPhone(e.target.value)}
                                 />
                                 <button type='submit'>
                                     Yuborish

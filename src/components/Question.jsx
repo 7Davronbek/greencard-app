@@ -20,7 +20,7 @@ const Question = () => {
                     </div>
                     <div className="col-lg-4 offset-lg-1 mb-5">
                         <div className="block">
-                            <h4>Green Card dasturida ishtirok etish uchun Xalqato pasport muhimmi?</h4>
+                            <h4>Green Card dasturida ishtirok etish uchun Xalqaro pasport muhimmi?</h4>
                             <p>Muhim emas, agar sizda hozirda biometrik pasport bo'lsa siz bizning saytimiz orqali anketa to'ldirib ishtirok etishingiz mumkin.</p>
                         </div>
                     </div>

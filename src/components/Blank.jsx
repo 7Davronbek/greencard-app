@@ -232,7 +232,7 @@ const Blank = () => {
                                             <select onChange={(e) => setDistrictOffisial(e.target.value)} className='controls cursor'>
                                                 <option value="">Tanlanmagan</option>
                                                 {district && district.map((item, index) => (
-                                                    <option key={index} value={item.region_id}>{item.name_uz}</option>
+                                                    <option key={index} value={item.id}>{item.name_uz}</option>
                                                 ))}
                                             </select>
                                         </div>

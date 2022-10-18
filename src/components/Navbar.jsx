@@ -21,7 +21,7 @@ const Navbar = () => {
                     <div className="row align-items-center">
                         <div className="col-1">
                             <div className="logo">
-                                <a href="/"><img className='' src="img/logo.png" alt="" /></a>
+                                <a href="/"><img className='w-100' src="img/logo.png" alt="" /></a>
                             </div>
                         </div>
                         <div className={`col-4 mobileWrap ${burger ? '' : 'burgered'}`}>

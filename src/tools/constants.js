@@ -1,4 +1,4 @@
-export const API_PATH = 'https://onzone.kokoagency.uz/'
+export const API_PATH = 'https://onzone.kokoagency.uz'
 
 
 

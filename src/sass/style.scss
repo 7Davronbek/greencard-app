@@ -140,13 +140,13 @@ body {
         }
 
         .tel {
+            text-align: end;
             a {
                 color: $lightYellow;
                 font-size: 21px;
                 font-weight: 500;
                 border-bottom: 1px solid $lightYellow;
                 font-family: $roboto;
-
             }
         }
 
@@ -1246,7 +1246,6 @@ body {
         //     }
         // }
     }
-
     .isitAll {
         background: rgba(0, 0, 0, 0.5);
         z-index: 99999;
@@ -1306,6 +1305,7 @@ body {
             }
         }
     }
+
 
     .Children {
         padding: 0 !important;
